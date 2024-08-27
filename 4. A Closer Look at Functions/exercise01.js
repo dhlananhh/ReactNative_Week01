@@ -54,70 +54,52 @@
 */
 
 
-// const poll = {
-//     question: "What is your favourite programming language?",
-//     options: ["0: JavaScript", "1: Python", "2: Rust", "3: C++"],
-//     answers: new Array(4).fill(0),
-//     registerNewAnswer() {
-//         const answer = Number(prompt(`${this.question}\n${this.options.join('\n')}\n(Write option number)`));
-//         if (answer >= 0 && answer <= 3) {
-//             this.answers[answer]++;
-//         }
-//         this.displayResults();
-//         this.displayResults('string');
-//     },
-//     displayResults(type = 'array') {
-//         if (type === 'array') {
-//             console.log(this.answers);
-//         } else if (type === 'string') {
-//             console.log(`Poll results are ${this.answers.join(', ')}`);
-//         }
-//     }
-// };
-
-
 const poll = {
     question: "What is your favourite programming language?",
-    options: ["0: JavaScript", "1: Python", "2: Rust", "3: C++"],
+    options: ["JavaScript", "Python", "Rust", "C++"],
     answers: new Array(4).fill(0),
-    
-    registerNewAnswer() {
-        // Hiển thị prompt và lấy input
-        const input = prompt(
-            `${this.question}\n${this.options.join('\n')}\n(Write option number)`
-        );
+};
 
-        // Kiểm tra và cập nhật câu trả lời
-        if (input !== null && input !== '') {
-            const answer = Number(input);
-            if (answer >= 0 && answer < this.answers.length) {
-                this.answers[answer]++;
-                this.displayResults();
-            } else {
-            alert('Invalid option!');
-            }
-        }
-    },
-    
-    displayResults(type = 'array') {
-        if (type === 'string') {
-            console.log(`Poll results are ${this.answers.join(', ')}`);
-        } else {
-            console.log(this.answers);
-        }
+function renderPoll() {
+    const pollQuestionEl = document.getElementById('poll-question');
+    pollQuestionEl.textContent = poll.question;
+
+    const pollOptionsEl = document.getElementById('poll-options');
+    pollOptionsEl.innerHTML = '';
+    poll.options.forEach((option, index) => {
+        const liEl = document.createElement('li');
+        liEl.textContent = `${index}: ${option}`;
+        pollOptionsEl.appendChild(liEl);
+    });
+}
+
+function registerNewAnswer() {
+    const selectedOption = parseInt(prompt(`${poll.question}\n${poll.options.map((option, index) => `${index}: ${option}`).join('\n')}\n(Write option number)`));
+    if (isNaN(selectedOption) || selectedOption < 0 || selectedOption >= poll.options.length) {
+        alert('Invalid option selected. Please try again.');
+        return;
     }
-};
+    poll.answers[selectedOption]++;
+    displayResults();
+}
 
-// Gắn sự kiện cho nút "Answer poll"
-document.querySelector('#poll-button').addEventListener('click', poll.registerNewAnswer.bind(poll));
+function displayResults(type = 'array') {
+    const resultsEl = document.getElementById('results');
+    if (type === 'array') {
+        resultsEl.textContent = `Poll results are ${poll.answers.join(', ')}`;
+    } else {
+        const resultString = poll.answers.reduce((acc, count, index) => {
+            return `${acc}${index}: ${count} `;
+        }, '');
+        resultsEl.textContent = `Poll results are ${resultString.trim()}`;
+    }
+}
 
-// Bonus: Hiển thị kết quả cho dữ liệu test
-const displayResultsFor = function(type) {
-    poll.displayResults.call({ answers: this }, type);
-};
+renderPoll();
 
-// Hiển thị kết quả cho dữ liệu test
-displayResultsFor.call([5, 2, 3]);
-displayResultsFor.call([5, 2, 3], 'string');
-displayResultsFor.call([1, 5, 3, 9, 6, 1]);
-displayResultsFor.call([1, 5, 3, 9, 6, 1], 'string');
+const answerBtn = document.getElementById('answer-btn');
+answerBtn.addEventListener('click', registerNewAnswer);
+
+// Test data for bonus
+displayResults('array');
+displayResults('string');
