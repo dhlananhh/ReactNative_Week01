@@ -37,9 +37,10 @@ function calcAverageHumanAge(ages) {
     return averageHumanAge;
 }
 
-// 4. Chạy hàm với cả hai bộ dữ liệu test
-console.log("--- Test Data 1 ---");
-console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]));
 
-console.log("--- Test Data 2 ---");
-console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]));
+// 4. Chạy hàm với cả hai bộ dữ liệu test
+const testData1 = [5, 2, 4, 1, 15, 8, 3];
+const testData2 = [16, 6, 10, 5, 6, 1, 4];
+
+console.log("Tuổi trung bình của chó (theo năm người) cho Data 1:", calcAverageHumanAge(testData1));
+console.log("Tuổi trung bình của chó (theo năm người) cho Data 2:", calcAverageHumanAge(testData2));
