@@ -27,7 +27,7 @@ const calcTip = (bill) => {
 };
 
 // Kiểm tra hàm với giá trị hóa đơn là 100
-console.log(calcTip(100));
+console.log("Tip for $100 bill:", calcTip(100));
 
 // 2. Mảng chứa dữ liệu test
 const bills = [125, 555, 44];
