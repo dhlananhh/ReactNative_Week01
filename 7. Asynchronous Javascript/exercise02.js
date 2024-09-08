@@ -32,6 +32,14 @@ async function loadImages() {
         currentImage = await createImage('img/image2.png'); // Hình ảnh 2
         await wait(2);
         currentImage.style.display = 'none';
+
+        currentImage = await createImage('img/image3.png'); // Hình ảnh 3
+        await wait(2);
+        currentImage.style.display = 'none';
+
+        currentImage = await createImage('img/image4.png'); // Hình ảnh 4
+        await wait(2);
+        currentImage.style.display = 'none';
     } catch (error) {
         console.error(error);
     }
