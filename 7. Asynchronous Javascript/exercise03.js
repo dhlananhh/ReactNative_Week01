@@ -23,6 +23,14 @@ async function loadNPause() {
         let img2 = await createImage('img/image2.png'); // Hình ảnh 2
         await wait(2);
         img2.style.display = 'none';
+
+        let img3 = await createImage('img/image3.png'); // Hình ảnh 3
+        await wait(2);
+        img3.style.display = 'none';
+
+        let img4 = await createImage('img/image4.png'); // Hình ảnh 4
+        await wait(2);
+        img4.style.display = 'none';
     } catch (error) {
         console.error(error);
     }
